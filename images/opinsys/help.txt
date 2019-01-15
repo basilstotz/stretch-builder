@@ -1,0 +1,1 @@
+Put vanilla images here and symlink to ../stretch.img
