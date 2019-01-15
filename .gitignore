@@ -4,11 +4,12 @@
 *.img*
 *rdiff*
 authorized_keys
-id_dsa*
-id_rsa*
-config-trusty.sh
+*id_dsa*
+*id_rsa*
 config-stretch.sh
-includes/var
-includes/install/packages
-includes/root
+includes/var/
+includes/root/
+includes/install/packages/
+includes/install/var/
+includes/install/root/
 
