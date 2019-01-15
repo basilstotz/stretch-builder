@@ -7,9 +7,7 @@ authorized_keys
 *id_dsa*
 *id_rsa*
 config-stretch.sh
-includes/var/
-includes/root/
 includes/install/packages/
 includes/install/var/
-includes/install/root/
+
 
