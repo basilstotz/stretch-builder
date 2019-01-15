@@ -16,22 +16,22 @@ if test -z "$PASSWD"; then echo "pls set password!"; exit 1; fi
 # processing extremetuxracer enigma fillets-ng  virt-manager pauker texlive-latex-extra gcompris-sound-en autossh libreoffice-l10n-fr libreoffice-l10n-de firefox-locale-en firefox-locale-de firefox-locale-fr unoconv debian-goodies 
 # avidemux fonts-crosextra-carlito fonts-crosextra-caladea youtube-dl 
 #gcompris-sound-de  gcompris-sound-en   rygel gnome-photoprinter 
-
+# texlive  gummi  minetest-server
 # use tracker: gnome-documents gnome-photos gnome-music  
 
 EXTRA_PACKAGES="xosview pdfshuffler pdftk djmount   
-                texlive texlive-lang-german texlive-lang-french 
+                texlive-lang-german texlive-lang-french 
                 texlive-lang-english 
                 python-pypdf   rednotebook impressive 
-                gnash gummi handbrake                             
+                gnash handbrake                             
 		gcompris-sound-fr kodi 
                 gparted sox key-mon screenkey dosemu 
-                avahi-utils avahi-discover vokoscreen 
+                vokoscreen 
                 photofilmstrip photocollage 
                 gnome-sound-recorder gnome-maps gnome-calendar
                 font-manager california linphone
                 obs-studio webfs vde2
-                minetest minetest-server minetest-mod-*"
+                minetest minetest-mod-*"
 
 
 # no proxy
@@ -54,6 +54,9 @@ echo -n "installiere Zusatzpakete ..."
 
 
 #apt-get --yes update
+echo
+echo "base-stretch packages"
+echo
 
 
   for N in $(ls /install/base-debs-stretch/*.deb); do
@@ -67,9 +70,11 @@ echo -n "installiere Zusatzpakete ..."
 # install missing dependencies                                                  
 apt-get --yes -f install
 
-
-
+echo
+echo "extra packages"
+echo
 ###############################################################3
+apt-get update
 for P in ${EXTRA_PACKAGES}; do
    apt-get --yes install ${P}
 done
@@ -87,15 +92,19 @@ echo "ok"
 echo
 
 # install *.deb in /root/debs
-for N in $(ls /install/debs-stretch/*.deb); do
-   echo
-   echo "instaliere ${N} ..."
-   echo
-   dpkg -i ${N}
+#for N in $(ls /install/debs-stretch/*.deb); do
+#   echo
+#   echo "instaliere ${N} ..."
+#   echo
+#   dpkg -i ${N}
  #  rm ${N}
-
-done
+#done
 echo "ok"
+
+
+echo
+echo "nonfree debs..."
+echo
 
 # install *.deb in /root/rdebs
 if test "$FREE" -eq "0"; then
@@ -114,6 +123,9 @@ echo "ok"
 # install missing dependencies
 DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::=--force-confnew --yes  --force-yes  -f install
 
+echo
+echo "remove unsused"
+echo
 
 
 #remove big not important packages
@@ -124,15 +136,16 @@ PURGEB=" texlive-latex-extra-doc texlive-fonts-extra texlive-fonts-extra-doc tex
 #PURGEC= "racket racket-common racket-doc fritzing fritzing-data globilab vstloggerpro cmaptools maxima tmcbeans pycharm maxima-doc "
 PURGEC=" racket-doc maxima-doc " 
 #
-for N in $PURGEA $PURGEB $PURGEC; do
-  apt-get --yes purge $N
-done
-
-#dpkg --list |grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge
 
 
-#apt-get --yes autoremove
-#apt-get --yes autoremove
+#uncomment to purge packages
+
+#for N in $PURGEA $PURGEB $PURGEC; do
+#  apt-get --yes purge $N
+#done
+
+
+
 
 
 echo "exiting chroot....."

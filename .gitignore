@@ -8,6 +8,7 @@ id_dsa*
 id_rsa*
 config-trusty.sh
 config-stretch.sh
-includes/var/
-includes/install/packages/
-includes/root/
+includes/var
+includes/install/packages
+includes/root
+
