@@ -53,7 +53,8 @@ echo -n "installiere Zusatzpakete ..."
 #cp /install/sources.list /etc/apt/.
 
 
-#apt-get --yes update
+apt-get --yes update
+
 echo
 echo "base-stretch packages"
 echo
@@ -74,7 +75,7 @@ echo
 echo "extra packages"
 echo
 ###############################################################3
-apt-get update
+
 for P in ${EXTRA_PACKAGES}; do
    apt-get --yes install ${P}
 done
@@ -91,15 +92,6 @@ DEBIAN_FRONTEND=noninteractive apt-get --yes  --force-yes install -f install
 echo "ok"
 echo
 
-# install *.deb in /root/debs
-#for N in $(ls /install/debs-stretch/*.deb); do
-#   echo
-#   echo "instaliere ${N} ..."
-#   echo
-#   dpkg -i ${N}
- #  rm ${N}
-#done
-echo "ok"
 
 
 echo
